@@ -6,7 +6,7 @@ const textColor = '#4f4a4a'
 export default function Product(props){
     
     return(
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity style={styles.container} onPress={props.detail}>
             <Image 
             style={styles.cover}
             source={props.item.image}

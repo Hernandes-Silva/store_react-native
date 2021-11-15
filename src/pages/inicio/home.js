@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, StyleSheet, ScrollView, FlatList, Text } from "react-native";
 import Product from "../../components/Product";
 
-export default function Home({ navagation }) {
+export default function Home({ navigation }) {
 
     const [novidades, setNovidades] = useState([])
 
@@ -29,7 +29,10 @@ export default function Home({ navagation }) {
         setNovidades(data)
     }, [])
     const renderItem = ({ item, index }) => {
-        return (<Product item={item} />)
+        function detail(){
+            navigation.navigate('detail',{item:item})
+        }
+        return (<Product item={item} detail={detail}/>)
     }
     return (
         <ScrollView showsVerticalScrollIndicator={false}
