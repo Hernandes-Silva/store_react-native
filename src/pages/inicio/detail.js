@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, ImageBackground, StyleSheet, View, Image } from "react-native";
+import { Text, ImageBackground, StyleSheet, View, Image, TouchableOpacity } from "react-native";
 import SwiperComponent from "../../components/Swiper";
 import Stars from 'react-native-stars'
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -31,6 +31,11 @@ export default function detail({ route, navagation }) {
             </View>
             <Text style={styles.price}>R$ {item.price}</Text>
             <Text style={styles.description}>{item.description}</Text>
+            <View style={styles.buttonContainer}>
+                <TouchableOpacity style={styles.button}>
+                   <Text style={styles.texttButton}>COMPRAR</Text> 
+                </TouchableOpacity>
+            </View>
 
         </View>
     )
@@ -81,6 +86,24 @@ const styles = StyleSheet.create({
         color: '#000',
         marginTop: 20,
         lineHeight: 20
+    },
+    buttonContainer: {
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    button:{
+        width:'90%',
+        height:50,
+        backgroundColor:'#17181a',
+        borderRadius: 5,
+        marginVertical: '5%',
+        justifyContent:'center',
+        alignItems:'center'
+
+    },
+    texttButton: {
+        fontSize:20,
+        color:'#fff'
     }
 
 
