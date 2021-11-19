@@ -3,8 +3,34 @@ import { Text, ImageBackground, StyleSheet, View, Image, TouchableOpacity } from
 import SwiperComponent from "../../components/Swiper";
 import Stars from 'react-native-stars'
 import Icon from 'react-native-vector-icons/Ionicons';
-export default function detail({ route, navagation }) {
+import AsyncStorage from '@react-native-community/async-storage';
+
+export default function detail({ route, navigation }) {
     const [item, setItem] = useState(route.params.item)
+
+    const comprar = async () => {
+        var items = await AsyncStorage.getItem('items')
+        if (items !== null){
+            items = JSON.parse(items)
+            var exist = false
+            items.map((item2)=>{
+                if(item2.id == item.id){
+                    exist = true
+                    return
+                }
+            })
+            if(!exist){
+                items.push(item)
+            }
+            
+            
+        }else{
+            items = [item]
+        }
+        await AsyncStorage.setItem('items', JSON.stringify(items))
+        navigation.navigate('cart')
+        
+    }
     return (
         <View style={styles.container}>
             <View style={styles.swiperContent}>
@@ -32,7 +58,7 @@ export default function detail({ route, navagation }) {
             <Text style={styles.price}>R$ {item.price}</Text>
             <Text style={styles.description}>{item.description}</Text>
             <View style={styles.buttonContainer}>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={styles.button} onPress={comprar}>
                    <Text style={styles.texttButton}>COMPRAR</Text> 
                 </TouchableOpacity>
             </View>
